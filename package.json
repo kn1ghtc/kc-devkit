@@ -2,7 +2,7 @@
   "name": "kc-devkit",
   "displayName": "KC DevKit",
   "description": "Comprehensive developer toolkit: Markdown preview (KaTeX + Mermaid + TOC), code formatting (JS/JSON/CSS/HTML), Python cache cleaner, and SageMath support with WSL integration.",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "publisher": "kn1ghtc",
   "author": {
     "name": "kn1ghtc"
@@ -37,6 +37,11 @@
     "developer-tools"
   ],
   "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "qna": "marketplace",
   "main": "./out/extension.js",
   "activationEvents": [
     "onLanguage:markdown",
@@ -47,19 +52,20 @@
     "onLanguage:css",
     "onLanguage:less",
     "onLanguage:scss",
-    "onLanguage:html",
-    "onLanguage:sage",
-    "onCommand:kcDevKit.cleanPycache"
+    "onLanguage:html"
   ],
   "contributes": {
     "markdown.markdownItPlugins": true,
     "markdown.previewStyles": [
       "./styles/katex.min.css",
       "./styles/mermaid.css",
-      "./styles/line-number.css"
+      "./styles/line-number.css",
+      "./styles/toc.css"
     ],
     "markdown.previewScripts": [
-      "./preview-scripts/mermaid-init.js"
+      "./preview-scripts/mermaid.min.js",
+      "./preview-scripts/mermaid-init.js",
+      "./preview-scripts/toc-init.js"
     ],
     "commands": [
       {

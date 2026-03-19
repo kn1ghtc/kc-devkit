@@ -2,8 +2,10 @@
  * markdown-it-mermaid — Mermaid Diagram Plugin
  *
  * Intercepts fenced code blocks with language `mermaid` and wraps them
- * in a `<div class="mermaid">` element. Actual rendering is performed
- * client-side by the mermaid-init.js preview script.
+ * in a `<div class="kc-mermaid">` element. We use `kc-mermaid` instead
+ * of `mermaid` to prevent the mermaid library's built-in startOnLoad
+ * auto-processing from interfering with our controlled rendering flow.
+ * The preview script handles initialization, rendering, and error display.
  *
  * Security: securityLevel is enforced in the preview script, not here.
  * This plugin only produces safe HTML wrappers.
@@ -42,7 +44,7 @@ export function mermaidPlugin(md: any): void {
         if (info === 'mermaid') {
             const content = escapeHtml(token.content);
             return (
-                `<div class="mermaid" data-mermaid-source="true">` +
+                `<div class="kc-mermaid" data-mermaid-source="true">` +
                 `${content}</div>\n`
             );
         }

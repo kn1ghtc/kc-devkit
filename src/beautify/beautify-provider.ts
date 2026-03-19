@@ -13,13 +13,6 @@ import { resolveBeautifyOptions } from './beautify-config';
 
 type BeautifierType = 'js' | 'css' | 'html';
 
-/** Map of beautifier type to the js-beautify function name. */
-const BEAUTIFIER_MAP: Record<BeautifierType, string> = {
-    js: 'js',
-    css: 'css',
-    html: 'html',
-};
-
 /**
  * Resolves the beautifier type for a given language ID using the
  * `kcDevKit.beautify.language` configuration.

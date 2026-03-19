@@ -1,0 +1,191 @@
+/* KC DevKit — Preview TOC Floating Panel */
+
+/* ── Toggle button (always visible, top-right) ──────────────── */
+#kc-toc-toggle {
+    position: fixed;
+    top: 10px;
+    right: 14px;
+    z-index: 10000;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--vscode-editorWidget-border, rgba(128,128,128,0.3));
+    border-radius: 6px;
+    background: var(--vscode-editorWidget-background, #252526);
+    color: var(--vscode-editor-foreground, #ccc);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+#kc-toc-toggle:hover {
+    opacity: 1;
+    background: var(--vscode-toolbar-hoverBackground, #2a2d2e);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+#kc-toc-toggle.active {
+    opacity: 1;
+    background: var(--vscode-focusBorder, #007acc);
+    color: #fff;
+}
+
+/* ── Panel container ────────────────────────────────────────── */
+#kc-toc-panel {
+    position: fixed;
+    top: 50px;
+    right: 14px;
+    z-index: 9999;
+    width: min(320px, calc(100vw - 40px));
+    max-height: calc(100vh - 70px);
+    background: var(--vscode-editorWidget-background, #252526);
+    border: 1px solid var(--vscode-editorWidget-border, rgba(128,128,128,0.3));
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: var(--vscode-font-family, -apple-system, BlinkMacSystemFont, sans-serif);
+    font-size: 13px;
+    animation: kcTocSlideIn 0.2s ease-out;
+}
+#kc-toc-panel.open {
+    display: flex;
+}
+
+@keyframes kcTocSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Panel header ───────────────────────────────────────────── */
+#kc-toc-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--vscode-editorWidget-border, rgba(128,128,128,0.2));
+    gap: 6px;
+    flex-shrink: 0;
+    user-select: none;
+}
+#kc-toc-header .kc-toc-title {
+    flex: 1;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--vscode-foreground, #ccc);
+    opacity: 0.8;
+}
+#kc-toc-header button {
+    background: none;
+    border: none;
+    color: var(--vscode-editor-foreground, #ccc);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.15s, background 0.15s;
+}
+#kc-toc-header button:hover {
+    opacity: 1;
+    background: var(--vscode-toolbar-hoverBackground, rgba(128,128,128,0.2));
+}
+
+/* ── Search bar ─────────────────────────────────────────────── */
+#kc-toc-search {
+    margin: 6px 10px;
+    padding: 5px 8px;
+    border: 1px solid var(--vscode-input-border, rgba(128,128,128,0.3));
+    border-radius: 4px;
+    background: var(--vscode-input-background, #3c3c3c);
+    color: var(--vscode-input-foreground, #ccc);
+    font-size: 12px;
+    outline: none;
+    flex-shrink: 0;
+}
+#kc-toc-search::placeholder {
+    color: var(--vscode-input-placeholderForeground, #888);
+}
+#kc-toc-search:focus {
+    border-color: var(--vscode-focusBorder, #007acc);
+}
+
+/* ── Scrollable list ────────────────────────────────────────── */
+#kc-toc-list {
+    overflow-y: auto;
+    flex: 1;
+    padding: 4px 0;
+    margin: 0;
+    list-style: none;
+    scrollbar-width: thin;
+}
+#kc-toc-list::-webkit-scrollbar {
+    width: 6px;
+}
+#kc-toc-list::-webkit-scrollbar-thumb {
+    background: rgba(128,128,128,0.3);
+    border-radius: 3px;
+}
+
+/* ── TOC items ──────────────────────────────────────────────── */
+#kc-toc-list li {
+    margin: 0;
+    padding: 0;
+}
+#kc-toc-list li a {
+    display: block;
+    padding: 4px 12px;
+    color: var(--vscode-editor-foreground, #ccc);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 2px solid transparent;
+    transition: background 0.12s, border-color 0.12s;
+    font-size: 12.5px;
+    line-height: 1.5;
+}
+#kc-toc-list li a:hover {
+    background: var(--vscode-list-hoverBackground, rgba(128,128,128,0.1));
+}
+#kc-toc-list li a.active {
+    background: var(--vscode-list-activeSelectionBackground, rgba(0,122,204,0.15));
+    border-left-color: var(--vscode-focusBorder, #007acc);
+    font-weight: 500;
+}
+/* Indent by heading level */
+#kc-toc-list li[data-level="1"] a { padding-left: 12px; }
+#kc-toc-list li[data-level="2"] a { padding-left: 24px; }
+#kc-toc-list li[data-level="3"] a { padding-left: 36px; }
+#kc-toc-list li[data-level="4"] a { padding-left: 48px; }
+#kc-toc-list li[data-level="5"] a { padding-left: 60px; }
+#kc-toc-list li[data-level="6"] a { padding-left: 72px; }
+
+/* ── Hidden items from search filter ────────────────────────── */
+#kc-toc-list li.kc-toc-hidden {
+    display: none;
+}
+
+/* ── Light theme overrides ──────────────────────────────────── */
+body.vscode-light #kc-toc-panel {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+body.vscode-light #kc-toc-toggle {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* ── Stats bar ──────────────────────────────────────────────── */
+#kc-toc-stats {
+    padding: 4px 12px 6px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground, #888);
+    border-top: 1px solid var(--vscode-editorWidget-border, rgba(128,128,128,0.15));
+    flex-shrink: 0;
+    user-select: none;
+}

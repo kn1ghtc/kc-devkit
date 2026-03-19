@@ -55,10 +55,10 @@ Full IDE support for SageMath mathematical software.
 | Command | Description | Keybinding |
 |---------|-------------|------------|
 | `KC DevKit: Refresh TOC` | Refresh Markdown TOC sidebar | — |
-| `KC DevKit: Beautify File` | Format entire document | `Ctrl+Shift+B` |
+| `KC DevKit: Beautify File` | Format entire document | — |
 | `KC DevKit: Beautify Selection` | Format selected text | — |
-| `KC DevKit: Clean Pycache` | Remove `__pycache__` directories | — |
-| `KC DevKit: Run SageMath File` | Execute current `.sage` file | `F5` (sage files) |
+| `KC DevKit: Clean Pycache` | Remove `__pycache__` directories | `Ctrl+Shift+P Ctrl+Shift+C` |
+| `KC DevKit: Run SageMath File` | Execute current `.sage` file | — |
 
 ---
 
@@ -70,18 +70,14 @@ All settings are under `kcDevKit.*` in VS Code settings.
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `kcDevKit.markdown.enabled` | `true` | Enable Markdown Ultra preview |
-| `kcDevKit.markdown.katex` | `true` | Enable KaTeX math rendering |
-| `kcDevKit.markdown.mermaid` | `true` | Enable Mermaid diagram rendering |
-| `kcDevKit.markdown.lineNumbers` | `true` | Enable code block line numbers |
-| `kcDevKit.markdown.toc` | `true` | Enable TOC sidebar tree view |
+| `kcDevKit.markdown.enabled` | `true` | Enable Markdown Ultra features (KaTeX, Mermaid, TOC, line numbers) |
 
 ### Beautify
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `kcDevKit.beautify.enabled` | `true` | Enable code beautifier |
-| `kcDevKit.beautify.language` | `{}` | Language → file pattern mapping |
+| `kcDevKit.beautify.language` | `{js:{...},css:{...},html:{...}}` | Language → beautifier type mapping |
 | `kcDevKit.beautify.ignore` | `[]` | Glob patterns to exclude from formatting |
 
 ### Pycache
@@ -90,24 +86,27 @@ All settings are under `kcDevKit.*` in VS Code settings.
 |---------|---------|-------------|
 | `kcDevKit.pycache.enabled` | `true` | Enable pycache cleaner |
 | `kcDevKit.pycache.autoCleanOnOpen` | `false` | Auto-clean when workspace opens |
+| `kcDevKit.pycache.exclude` | `["**/node_modules/**",...]` | Glob patterns to exclude from cleanup |
 
 ### SageMath
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `kcDevKit.sage.enabled` | `true` | Enable SageMath support |
-| `kcDevKit.sage.path` | `"sage"` | Path to Sage executable |
-| `kcDevKit.sage.useWSL` | `false` | Run Sage through WSL on Windows |
-| `kcDevKit.sage.autoDeleteSagePy` | `true` | Delete `.sage.py` after execution |
+| `kcDevKit.sagemath.enabled` | `true` | Enable SageMath support |
+| `kcDevKit.sagemath.interpreterPath` | `"sage"` | Path to Sage executable |
+| `kcDevKit.sagemath.useWSL` | `false` | Run Sage through WSL on Windows |
+| `kcDevKit.sagemath.autoDeleteGenerated` | `false` | Delete `.sage.py` after execution |
 
 ---
 
 ## Getting Started
 
-### Install from VSIX
+### Install from Marketplace
+
+Search **"KC DevKit"** in the VS Code Extensions panel, or run:
 
 ```bash
-code --install-extension kc-devkit-1.0.0.vsix
+code --install-extension kn1ghtc.kc-devkit
 ```
 
 ### Build from Source

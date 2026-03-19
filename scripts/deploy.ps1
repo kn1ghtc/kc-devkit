@@ -9,21 +9,42 @@
 $ErrorActionPreference = 'Stop'
 $ProjectRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 
-Write-Host "=== KC DevKit Deploy ===" -ForegroundColor Cyan
+# Read version from package.json (single source of truth)
+$pkgJson = Get-Content (Join-Path $ProjectRoot "package.json") -Raw | ConvertFrom-Json
+$Version = $pkgJson.version
+
+Write-Host "=== KC DevKit Deploy v$Version ===" -ForegroundColor Cyan
 Set-Location $ProjectRoot
 
-# Step 1: Parse .env file for AZURE_PAT
-$envFile = Join-Path $ProjectRoot ".env"
+# Step 1: Parse .env file for AZURE_PAT (walk up to workspace root)
 $pat = $null
 
-if (Test-Path $envFile) {
+function Find-EnvFile($startDir) {
+    $dir = $startDir
+    while ($dir) {
+        $candidate = Join-Path $dir ".env"
+        if (Test-Path $candidate) { return $candidate }
+        $parent = Split-Path $dir -Parent
+        if ($parent -eq $dir) { break }
+        $dir = $parent
+    }
+    return $null
+}
+
+$envFile = Join-Path $ProjectRoot ".env"
+if (-not (Test-Path $envFile)) {
+    $envFile = Find-EnvFile $ProjectRoot
+}
+
+if ($envFile -and (Test-Path $envFile)) {
+    Write-Host "  Using .env: $envFile" -ForegroundColor DarkGray
     Get-Content $envFile | ForEach-Object {
         if ($_ -match '^([^#][^=]+)=(.+)$') {
             $key = $matches[1].Trim()
-            $val = $matches[2].Trim()
+            $val = $matches[2].Trim().Trim('"').Trim("'")
             [Environment]::SetEnvironmentVariable($key, $val, 'Process')
             if ($key -eq 'AZURE_PAT') {
-                $pat = $val
+                $script:pat = $val
             }
         }
     }
@@ -44,15 +65,17 @@ if ($LASTEXITCODE -ne 0) {
 
 # Step 3: Package VSIX
 Write-Host "[2/3] Packaging VSIX..." -ForegroundColor Yellow
-$vsce = Join-Path $ProjectRoot "node_modules/.bin/vsce"
 
-& $vsce package --no-dependencies 2>&1
+# Clean old VSIX files before packaging
+Get-ChildItem -Path $ProjectRoot -Filter "*.vsix" | Remove-Item -Force
+
+npx vsce package --no-dependencies 2>&1
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: VSIX packaging failed" -ForegroundColor Red
     exit 1
 }
 
-$vsix = Get-ChildItem -Path $ProjectRoot -Filter "*.vsix" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+$vsix = Get-ChildItem -Path $ProjectRoot -Filter "*.vsix" | Select-Object -First 1
 if (-not $vsix) {
     Write-Host "ERROR: No .vsix file found" -ForegroundColor Red
     exit 1
@@ -66,7 +89,7 @@ Write-Host "[3/3] Publishing / Installing..." -ForegroundColor Yellow
 
 if ($pat) {
     Write-Host "  AZURE_PAT found — publishing to marketplace..." -ForegroundColor Cyan
-    & $vsce publish --pat $pat --no-dependencies 2>&1
+    npx vsce publish --pat $pat --no-dependencies 2>&1
     if ($LASTEXITCODE -ne 0) {
         Write-Host "WARNING: Marketplace publish failed. Installing locally instead." -ForegroundColor Yellow
     } else {

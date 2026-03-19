@@ -10,5 +10,10 @@ scripts/
 .vscode/
 .vscode-test/
 node_modules/
-*.map
+**/*.map
 .gitignore
+styles/fonts/*.ttf
+styles/fonts/*.woff
+preview-scripts/mermaid-init-src.js
+preview-scripts/toc-init-src.js
+*.py
