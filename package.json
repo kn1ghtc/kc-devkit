@@ -1,0 +1,268 @@
+{
+  "name": "kc-devkit",
+  "displayName": "KC DevKit",
+  "description": "Comprehensive developer toolkit: Markdown preview (KaTeX + Mermaid + TOC), code formatting (JS/JSON/CSS/HTML), Python cache cleaner, and SageMath support with WSL integration.",
+  "version": "1.0.0",
+  "publisher": "kn1ghtc",
+  "author": {
+    "name": "kn1ghtc"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kn1ghtc/kc-devkit.git"
+  },
+  "homepage": "https://github.com/kn1ghtc/kc-devkit#readme",
+  "bugs": {
+    "url": "https://github.com/kn1ghtc/kc-devkit/issues"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Formatters",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "mermaid",
+    "katex",
+    "beautify",
+    "formatter",
+    "pycache",
+    "sagemath",
+    "sage",
+    "math",
+    "developer-tools"
+  ],
+  "icon": "icon.png",
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:json",
+    "onLanguage:jsonc",
+    "onLanguage:css",
+    "onLanguage:less",
+    "onLanguage:scss",
+    "onLanguage:html",
+    "onLanguage:sage",
+    "onCommand:kcDevKit.cleanPycache"
+  ],
+  "contributes": {
+    "markdown.markdownItPlugins": true,
+    "markdown.previewStyles": [
+      "./styles/katex.min.css",
+      "./styles/mermaid.css",
+      "./styles/line-number.css"
+    ],
+    "markdown.previewScripts": [
+      "./preview-scripts/mermaid-init.js"
+    ],
+    "commands": [
+      {
+        "command": "kcDevKit.refreshToc",
+        "title": "Refresh Markdown TOC",
+        "category": "KC DevKit",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "kcDevKit.beautifyFile",
+        "title": "Beautify File",
+        "category": "KC DevKit"
+      },
+      {
+        "command": "kcDevKit.beautifySelection",
+        "title": "Beautify Selection",
+        "category": "KC DevKit"
+      },
+      {
+        "command": "kcDevKit.cleanPycache",
+        "title": "Clean Python Cache Files",
+        "category": "KC DevKit",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "kcDevKit.runSageFile",
+        "title": "Run SageMath File",
+        "category": "KC DevKit",
+        "icon": "$(play)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "kcDevKitToc",
+          "name": "Markdown Outline",
+          "when": "resourceLangId == markdown"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "kcDevKit.refreshToc",
+          "when": "view == kcDevKitToc",
+          "group": "navigation"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "kcDevKit.runSageFile",
+          "when": "resourceLangId == sage",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "kcDevKit.runSageFile",
+          "when": "resourceLangId == sage"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "kcDevKit.cleanPycache",
+        "key": "ctrl+shift+p ctrl+shift+c",
+        "when": "workspaceFolderCount > 0"
+      }
+    ],
+    "languages": [
+      {
+        "id": "sage",
+        "aliases": [
+          "SageMath",
+          "sage"
+        ],
+        "extensions": [
+          ".sage",
+          ".sagews"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sage",
+        "scopeName": "source.sage",
+        "path": "./syntaxes/sage.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "sage",
+        "path": "./snippets/sage.json"
+      }
+    ],
+    "configuration": {
+      "title": "KC DevKit",
+      "properties": {
+        "kcDevKit.markdown.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Markdown Ultra features (KaTeX, Mermaid, TOC, line numbers)"
+        },
+        "kcDevKit.beautify.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable code beautify/formatting features"
+        },
+        "kcDevKit.beautify.language": {
+          "type": "object",
+          "default": {
+            "js": {
+              "type": [
+                "javascript",
+                "javascriptreact",
+                "json",
+                "jsonc"
+              ]
+            },
+            "css": {
+              "type": [
+                "css",
+                "less",
+                "scss"
+              ]
+            },
+            "html": {
+              "type": [
+                "html"
+              ]
+            }
+          },
+          "description": "Language to beautifier type mapping"
+        },
+        "kcDevKit.beautify.ignore": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Glob patterns to ignore when formatting"
+        },
+        "kcDevKit.pycache.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Python cache cleaner features"
+        },
+        "kcDevKit.pycache.autoCleanOnOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically clean __pycache__ and .pyc files when workspace opens"
+        },
+        "kcDevKit.pycache.exclude": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/.venv/**",
+            "**/venv/**"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Glob patterns to exclude from pycache cleanup"
+        },
+        "kcDevKit.sagemath.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable SageMath support features"
+        },
+        "kcDevKit.sagemath.interpreterPath": {
+          "type": "string",
+          "default": "sage",
+          "description": "Path to the SageMath interpreter"
+        },
+        "kcDevKit.sagemath.useWSL": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use WSL to run SageMath on Windows"
+        },
+        "kcDevKit.sagemath.autoDeleteGenerated": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-delete .sage.py files generated by SageMath"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "powershell -ExecutionPolicy Bypass -File scripts/build.ps1",
+    "package": "npx @vscode/vsce package --no-dependencies",
+    "deploy": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^3.2.2",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "js-beautify": "^1.15.1",
+    "katex": "^0.16.21",
+    "mermaid": "^11.4.1"
+  }
+}

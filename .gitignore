@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+out/
+
+# VSIX packages
+*.vsix
+
+# Environment
+.env
+.env.local
+
+# VS Code test
+.vscode-test/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# TypeScript cache
+*.tsbuildinfo

@@ -1,0 +1,67 @@
+/* KC DevKit — Code Block Line Numbers (CSS Counter) */
+
+pre.line-numbers {
+    position: relative;
+    padding-left: 3.5em;
+    counter-reset: line-number;
+}
+
+pre.line-numbers > code {
+    position: relative;
+    display: block;
+}
+
+/**
+ * Each line in the code block gets a ::before pseudo-element
+ * with the CSS counter value. This relies on each line being
+ * separated by newlines in the <code> text content, and CSS
+ * white-space: pre maintaining the line structure.
+ */
+pre.line-numbers > code::before {
+    content: "";
+    position: absolute;
+    left: -3.5em;
+    width: 2.8em;
+    top: 0;
+    bottom: 0;
+    border-right: 1px solid var(--vscode-editorLineNumber-foreground, rgba(128, 128, 128, 0.35));
+}
+
+/* Line number overlay — using background gradient trick for consistent numbering */
+pre.line-numbers {
+    background-image: linear-gradient(
+        transparent 50%,
+        rgba(128, 128, 128, 0.03) 50%
+    );
+    background-size: 100% calc(var(--vscode-editor-lineHeight, 1.5em) * 2);
+    background-origin: content-box;
+}
+
+/* Gutter area styling */
+pre.line-numbers::before {
+    content: attr(data-line-start, "");
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.8em;
+    height: 100%;
+    background: var(--vscode-editorGutter-background, transparent);
+    border-right: 1px solid var(--vscode-editorLineNumber-foreground, rgba(128, 128, 128, 0.35));
+    pointer-events: none;
+}
+
+/* Dark theme adjustments */
+body.vscode-dark pre.line-numbers {
+    background-image: linear-gradient(
+        transparent 50%,
+        rgba(255, 255, 255, 0.02) 50%
+    );
+}
+
+/* Light theme adjustments */
+body.vscode-light pre.line-numbers {
+    background-image: linear-gradient(
+        transparent 50%,
+        rgba(0, 0, 0, 0.02) 50%
+    );
+}

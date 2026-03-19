@@ -1,0 +1,58 @@
+/* KC DevKit — Mermaid Container Styles */
+
+.mermaid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    overflow-x: auto;
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Dark theme */
+body.vscode-dark .mermaid {
+    background: transparent;
+    color: #d4d4d4;
+}
+
+body.vscode-dark .mermaid svg {
+    filter: none;
+}
+
+/* Light theme */
+body.vscode-light .mermaid {
+    background: transparent;
+    color: #333;
+}
+
+/* High-contrast theme */
+body.vscode-high-contrast .mermaid {
+    background: transparent;
+}
+
+/* Loading / error placeholder */
+.mermaid[data-mermaid-source="true"] {
+    font-family: var(--vscode-editor-font-family, monospace);
+    font-size: 0.85em;
+    white-space: pre-wrap;
+    color: var(--vscode-editor-foreground, #ccc);
+    opacity: 0.6;
+}
+
+.mermaid[data-processed="true"] {
+    opacity: 1;
+}
+
+.mermaid-error {
+    color: var(--vscode-errorForeground, #f44);
+    border: 1px solid var(--vscode-errorForeground, #f44);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: var(--vscode-editor-font-family, monospace);
+    font-size: 0.85em;
+    white-space: pre-wrap;
+}

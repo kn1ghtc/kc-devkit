@@ -1,0 +1,59 @@
+{
+    "name": "SageMath",
+    "scopeName": "source.sage",
+    "patterns": [
+        { "include": "#sageSpecific" },
+        { "include": "source.python" }
+    ],
+    "repository": {
+        "sageSpecific": {
+            "patterns": [
+                { "include": "#sageBuiltins" },
+                { "include": "#sageRings" },
+                { "include": "#sagePlotting" },
+                { "include": "#sageLinearAlgebra" },
+                { "include": "#sageCalculus" },
+                { "include": "#sageNumberTheory" },
+                { "include": "#sageCombinatorics" },
+                { "include": "#sageGraphs" },
+                { "include": "#sageCrypto" }
+            ]
+        },
+        "sageBuiltins": {
+            "match": "\\b(var|show|pretty_print|latex|html|interact|assume|forget|version|preparse|sage_eval|loads|dumps|save|load|attach|reset|restore)\\b",
+            "name": "support.function.builtin.sage"
+        },
+        "sageRings": {
+            "match": "\\b(ZZ|QQ|RR|CC|QQbar|RDF|CDF|RIF|CIF|AA|GF|Zmod|IntegerModRing|PolynomialRing|FractionField|NumberField|QuadraticField|CyclotomicField|PowerSeriesRing|LaurentSeriesRing|LaurentPolynomialRing|FreeAlgebra|QuaternionAlgebra|FiniteField|pAdicField|Qp|Zp|AdicCompletion|Integer|Rational|RealNumber|ComplexNumber|Infinity|oo|SR|pi|e|I|golden_ratio|euler_gamma|catalan)\\b",
+            "name": "support.type.ring.sage"
+        },
+        "sagePlotting": {
+            "match": "\\b(plot|plot3d|parametric_plot|parametric_plot3d|implicit_plot|implicit_plot3d|contour_plot|density_plot|region_plot|list_plot|list_plot3d|bar_chart|scatter_plot|point|line|circle|disk|ellipse|arc|arrow|polygon|text|animate|graphics_array|show)\\b",
+            "name": "support.function.plotting.sage"
+        },
+        "sageLinearAlgebra": {
+            "match": "\\b(matrix|Matrix|MatrixSpace|vector|VectorSpace|identity_matrix|zero_matrix|ones_matrix|random_matrix|diagonal_matrix|block_matrix|jordan_block|companion_matrix|det|rank|kernel|image|eigenvalues|eigenvectors|eigenmatrix_left|eigenmatrix_right|echelon_form|hermite_form|smith_form|transpose|conjugate|gram_schmidt|LLL|cholesky)\\b",
+            "name": "support.function.linalg.sage"
+        },
+        "sageCalculus": {
+            "match": "\\b(diff|derivative|integral|integrate|limit|taylor|series|sum|prod|solve|find_root|minimize|maximize|desolve|desolve_system|desolve_rk4|desolve_odeint|laplace|inverse_laplace|fourier|inverse_fourier|simplify|simplify_full|simplify_trig|simplify_rational|factor|expand|collect|combine|partial_fraction|real_part|imag_part|abs|conjugate|sqrt|log|ln|exp|sin|cos|tan|cot|sec|csc|asin|acos|atan|atan2|sinh|cosh|tanh|floor|ceil|round|sign|binomial|factorial|gamma|beta|zeta|psi|erf|erfc)\\b",
+            "name": "support.function.calculus.sage"
+        },
+        "sageNumberTheory": {
+            "match": "\\b(is_prime|is_prime_power|next_prime|previous_prime|prime_range|primes|primes_first_n|nth_prime|factor|divisors|euler_phi|moebius|sigma|gcd|lcm|xgcd|CRT|CRT_list|power_mod|inverse_mod|kronecker|legendre_symbol|jacobi_symbol|hilbert_symbol|bernoulli|fibonacci|lucas_number1|lucas_number2|catalan_number|bell_number|stirling_number1|stirling_number2|partition|Partitions|valuation|radical|squarefree_part)\\b",
+            "name": "support.function.number-theory.sage"
+        },
+        "sageCombinatorics": {
+            "match": "\\b(Permutations|Combinations|Compositions|Partitions|IntegerVectors|Subsets|Arrangements|Derangements|Words|BinaryStrings|CartesianProduct|Posets|LatticePoset|MobiusAlgebra|SetPartitions|StandardTableaux|SemistandardTableaux|Tableaux|CatalanNumber|MotzkinNumber|NarayanaNumber)\\b",
+            "name": "support.type.combinatorics.sage"
+        },
+        "sageGraphs": {
+            "match": "\\b(Graph|DiGraph|BipartiteGraph|graphs|digraphs|PetersenGraph|CompleteGraph|CompleteBipartiteGraph|CycleGraph|PathGraph|RandomGNP|RandomBarabasiAlbert|shortest_path|chromatic_number|chromatic_polynomial|is_planar|is_connected|is_bipartite|spanning_trees|minimum_spanning_tree|degree_sequence|adjacency_matrix|incidence_matrix|laplacian_matrix|automorphism_group)\\b",
+            "name": "support.function.graph.sage"
+        },
+        "sageCrypto": {
+            "match": "\\b(EllipticCurve|EllipticCurveIsogeny|EllipticCurves_with_good_reduction|HyperellipticCurve|AffineSpace|ProjectiveSpace|Curve|ReedSolomonCode|LinearCode|CyclicCode|HammingCode|GolayCode|BCHCode|GoppaCode|ReedMullerCode|random_prime|random_matrix|discrete_log|discrete_log_rho|discrete_log_lambda|BBS|blum_blum_shub|SBox|MPolynomialSystem)\\b",
+            "name": "support.function.crypto.sage"
+        }
+    }
+}

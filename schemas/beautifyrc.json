@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "jsbeautifyrc",
+    "description": "Configuration file for js-beautify (used by KC DevKit Beautify module)",
+    "type": "object",
+    "properties": {
+        "indent_size": {
+            "type": "integer",
+            "default": 4,
+            "description": "Indentation size"
+        },
+        "indent_char": {
+            "type": "string",
+            "default": " ",
+            "description": "Indentation character"
+        },
+        "indent_with_tabs": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indent with tabs instead of spaces"
+        },
+        "eol": {
+            "type": "string",
+            "enum": ["\n", "\r\n"],
+            "default": "\n",
+            "description": "End of line character"
+        },
+        "end_with_newline": {
+            "type": "boolean",
+            "default": false,
+            "description": "Ensure file ends with a newline"
+        },
+        "preserve_newlines": {
+            "type": "boolean",
+            "default": true,
+            "description": "Preserve existing line breaks"
+        },
+        "max_preserve_newlines": {
+            "type": "integer",
+            "default": 10,
+            "description": "Maximum number of line breaks to preserve"
+        },
+        "wrap_line_length": {
+            "type": "integer",
+            "default": 0,
+            "description": "Wrap lines at this length (0 = no wrap)"
+        },
+        "brace_style": {
+            "type": "string",
+            "enum": ["collapse", "expand", "end-expand", "none"],
+            "default": "collapse",
+            "description": "Brace placement style"
+        },
+        "space_in_paren": {
+            "type": "boolean",
+            "default": false,
+            "description": "Add spaces inside parentheses"
+        },
+        "space_in_empty_paren": {
+            "type": "boolean",
+            "default": false,
+            "description": "Add space inside empty parentheses"
+        },
+        "space_after_anon_function": {
+            "type": "boolean",
+            "default": false,
+            "description": "Add space before anonymous function parens"
+        },
+        "jslint_happy": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable jslint-compatible output"
+        },
+        "keep_array_indentation": {
+            "type": "boolean",
+            "default": false,
+            "description": "Preserve array indentation"
+        },
+        "js": {
+            "type": "object",
+            "description": "JavaScript-specific options (overrides top-level)"
+        },
+        "css": {
+            "type": "object",
+            "description": "CSS-specific options (overrides top-level)"
+        },
+        "html": {
+            "type": "object",
+            "description": "HTML-specific options (overrides top-level)"
+        }
+    }
+}

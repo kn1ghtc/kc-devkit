@@ -1,0 +1,14 @@
+src/**
+test/**
+*.ts
+!*.d.ts
+tsconfig.json
+.env*
+!.env.example
+docs/
+scripts/
+.vscode/
+.vscode-test/
+node_modules/
+*.map
+.gitignore

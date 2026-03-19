@@ -1,0 +1,132 @@
+{
+    "SageMath: Variable": {
+        "prefix": "var",
+        "body": "var('${1:x}')",
+        "description": "Declare a symbolic variable"
+    },
+    "SageMath: Multiple Variables": {
+        "prefix": "vars",
+        "body": "var('${1:x y z}')",
+        "description": "Declare multiple symbolic variables"
+    },
+    "SageMath: Polynomial Ring": {
+        "prefix": "polyring",
+        "body": "R.<${1:x}> = PolynomialRing(${2:QQ})",
+        "description": "Polynomial ring over a base ring"
+    },
+    "SageMath: Matrix": {
+        "prefix": "matrix",
+        "body": "M = matrix(${1:QQ}, ${2:3}, ${3:3}, [${4:1,0,0, 0,1,0, 0,0,1}])",
+        "description": "Create a matrix"
+    },
+    "SageMath: Identity Matrix": {
+        "prefix": "identity",
+        "body": "identity_matrix(${1:QQ}, ${2:3})",
+        "description": "Identity matrix"
+    },
+    "SageMath: Plot 2D": {
+        "prefix": "plot",
+        "body": "plot(${1:sin(x)}, (x, ${2:-pi}, ${3:pi}))",
+        "description": "2D plot of a function"
+    },
+    "SageMath: Plot 3D": {
+        "prefix": "plot3d",
+        "body": "plot3d(${1:sin(x)*cos(y)}, (x, ${2:-pi}, ${3:pi}), (y, ${4:-pi}, ${5:pi}))",
+        "description": "3D surface plot"
+    },
+    "SageMath: Solve": {
+        "prefix": "solve",
+        "body": "solve(${1:equation}, ${2:x})",
+        "description": "Solve an equation"
+    },
+    "SageMath: Factor": {
+        "prefix": "factor",
+        "body": "factor(${1:expression})",
+        "description": "Factor an expression or integer"
+    },
+    "SageMath: Expand": {
+        "prefix": "expand",
+        "body": "expand(${1:expression})",
+        "description": "Expand an expression"
+    },
+    "SageMath: Simplify": {
+        "prefix": "simplify",
+        "body": "simplify_full(${1:expression})",
+        "description": "Simplify an expression"
+    },
+    "SageMath: Differentiate": {
+        "prefix": "diff",
+        "body": "diff(${1:f}, ${2:x})",
+        "description": "Differentiate a function"
+    },
+    "SageMath: Integrate": {
+        "prefix": "integrate",
+        "body": "integrate(${1:f}, ${2:x})",
+        "description": "Indefinite integral"
+    },
+    "SageMath: Definite Integral": {
+        "prefix": "defint",
+        "body": "integrate(${1:f}, (${2:x}, ${3:a}, ${4:b}))",
+        "description": "Definite integral from a to b"
+    },
+    "SageMath: Limit": {
+        "prefix": "limit",
+        "body": "limit(${1:f}, ${2:x}=${3:oo})",
+        "description": "Limit of a function"
+    },
+    "SageMath: Taylor Series": {
+        "prefix": "taylor",
+        "body": "taylor(${1:f}, ${2:x}, ${3:0}, ${4:5})",
+        "description": "Taylor series expansion"
+    },
+    "SageMath: Finite Field": {
+        "prefix": "gf",
+        "body": "GF(${1:2}^${2:8}, '${3:a}')",
+        "description": "Galois Field (finite field)"
+    },
+    "SageMath: Integer Mod Ring": {
+        "prefix": "zmod",
+        "body": "Zmod(${1:n})",
+        "description": "Ring of integers mod n"
+    },
+    "SageMath: Random Matrix": {
+        "prefix": "randmat",
+        "body": "random_matrix(${1:ZZ}, ${2:3}, ${3:3})",
+        "description": "Random matrix"
+    },
+    "SageMath: Graph": {
+        "prefix": "graph",
+        "body": "G = Graph({${1:0}: [${2:1, 2}], ${3:1}: [${4:2}]})",
+        "description": "Create a graph from adjacency dict"
+    },
+    "SageMath: Elliptic Curve": {
+        "prefix": "ecc",
+        "body": "E = EllipticCurve(${1:GF(p)}, [${2:a}, ${3:b}])",
+        "description": "Elliptic curve over a field"
+    },
+    "SageMath: Elliptic Curve over QQ": {
+        "prefix": "eccqq",
+        "body": "E = EllipticCurve(QQ, [${1:0}, ${2:0}, ${3:0}, ${4:a4}, ${5:a6}])",
+        "description": "Elliptic curve over the rationals"
+    },
+    "SageMath: Number Field": {
+        "prefix": "numfield",
+        "body": "K.<${1:a}> = NumberField(${2:x^2 + 1})",
+        "description": "Number field extension"
+    },
+    "SageMath: Power Mod": {
+        "prefix": "powmod",
+        "body": "power_mod(${1:base}, ${2:exp}, ${3:mod})",
+        "description": "Modular exponentiation"
+    },
+    "SageMath: Discrete Log": {
+        "prefix": "dlog",
+        "body": "discrete_log(${1:target}, ${2:base})",
+        "description": "Discrete logarithm"
+    },
+    "SageMath: CRT": {
+        "prefix": "crt",
+        "body": "CRT_list([${1:remainders}], [${2:moduli}])",
+        "description": "Chinese Remainder Theorem"
+    }
+}
