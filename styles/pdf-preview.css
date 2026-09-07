@@ -1,0 +1,96 @@
+/* KC DevKit — PDF preview chrome (kc- prefix) */
+
+html,
+body.kc-pdf-body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    color: var(--vscode-foreground);
+    background: var(--vscode-editor-background);
+}
+
+.kc-pdf-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 6px 10px;
+    background: var(--vscode-editorWidget-background);
+    border-bottom: 1px solid var(--vscode-panel-border);
+    user-select: none;
+}
+
+.kc-pdf-btn {
+    appearance: none;
+    border: 1px solid var(--vscode-button-border, var(--vscode-panel-border));
+    background: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+    padding: 3px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font: inherit;
+}
+
+.kc-pdf-btn:hover {
+    background: var(--vscode-button-secondaryHoverBackground);
+}
+
+.kc-pdf-indicator {
+    min-width: 4.5em;
+    text-align: center;
+    color: var(--vscode-descriptionForeground);
+}
+
+.kc-pdf-sep {
+    width: 1px;
+    height: 1.2em;
+    margin: 0 4px;
+    background: var(--vscode-panel-border);
+}
+
+.kc-pdf-error {
+    margin: 12px;
+    padding: 12px 14px;
+    border-radius: 4px;
+    background: var(--vscode-inputValidation-errorBackground);
+    border: 1px solid var(--vscode-inputValidation-errorBorder);
+    color: var(--vscode-errorForeground);
+    white-space: pre-wrap;
+}
+
+.kc-pdf-scroll {
+    height: calc(100% - 42px);
+    overflow: auto;
+    background: var(--vscode-sideBar-background, var(--vscode-editor-background));
+}
+
+.kc-pdf-pages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0 32px;
+    min-height: 100%;
+}
+
+.kc-pdf-page {
+    background: #ffffff;
+    margin: 10px auto;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.kc-pdf-canvas {
+    display: block;
+    background: #ffffff;
+}
+
+.kc-pdf-page:empty::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}

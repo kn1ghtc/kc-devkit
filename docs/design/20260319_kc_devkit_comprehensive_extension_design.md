@@ -50,11 +50,15 @@ KC DevKit is a comprehensive VS Code developer toolkit extension that consolidat
 | ID | Requirement | Target |
 |----|-------------|--------|
 | NFR-1 | Extension activation time | < 200ms |
-| NFR-2 | VSIX package size | < 3 MB |
+| NFR-2 | VSIX package size | < 20 MB (pdf.js + cmaps + standard_fonts; was < 3 MB before PDF preview) |
 | NFR-3 | Memory overhead | < 50 MB |
 | NFR-4 | No external runtime dependencies (self-contained) | 0 external deps at runtime |
 | NFR-5 | VS Code compatibility | ^1.80.0 |
 | NFR-6 | Cross-platform support | Windows + macOS + Linux |
+
+### 2.2a PDF Preview Module (v1.3.0)
+
+Custom `CustomReadonlyEditorProvider` webview (`src/pdf/`) using **pdf.js legacy** canvas rendering. CJK coverage comes from vendored `cmaps/`; math/Type1 coverage from `standard_fonts/`. Assets are copied by `scripts/build.ps1` into `vendor/pdfjs/` (never loaded from `node_modules` at runtime). The extension host must not import `pdfjs-dist`. Default editor association: `*.pdf` → `kcDevKit.pdfPreview`.
 
 ### 2.3 Constraints
 
@@ -155,7 +159,7 @@ KC DevKit is a comprehensive VS Code developer toolkit extension that consolidat
 | Risk ID | Risk Description | Probability | Impact | Mitigation Strategy |
 |---------|-----------------|-------------|--------|---------------------|
 | R-1 | js-beautify output differs from user expectations | Medium | Medium | Respect .jsbeautifyrc + .editorconfig; clear documentation |
-| R-2 | Mermaid bundle inflates VSIX size beyond 3MB | Medium | Low | Use mermaid CDN option or aggressive tree-shaking |
+| R-2 | pdf.js + cmaps inflate VSIX (target now < 20 MB) | Medium | Low | Vendor only legacy build + cmaps + standard_fonts; never pack node_modules |
 | R-3 | AZURE_PAT rotation causes publish failures | Low | Medium | Clear error message; validate PAT before publish attempt |
 | R-4 | SageMath not installed → confusing errors | Medium | Medium | Detect sage availability; show installation guide notification |
 | R-5 | Multiple formatter extensions conflict | Low | High | Use proper `DocumentSelector` priorities; document conflict resolution |
@@ -442,7 +446,7 @@ kc-devkit/
 | Metric | Target | Measurement |
 |--------|--------|-------------|
 | Extension activation | < 200ms | VS Code startup timeline |
-| VSIX size | < 3 MB | File size check |
+| VSIX size | < 20 MB (with pdf.js assets) | File size check |
 | Markdown preview render | < 500ms for 1000-line doc | Manual test |
 | Code formatting | < 1s for 10,000-line file | Manual test |
 | Pycache cleanup | < 5s for workspace with 100 __pycache__ dirs | Manual test |
@@ -458,7 +462,7 @@ kc-devkit/
 | Metric | Target | Verification |
 |--------|--------|-------------|
 | Max file length | ≤ 300 lines per source file | `wc -l` audit |
-| Modular design | 4 independent feature modules | Directory structure review |
+| Modular design | Independent feature modules (Markdown, Beautify, Pycache, SageMath, PDF) | Directory structure review |
 | Configuration externalized | 0 hardcoded values | grep audit |
 | TypeScript strict mode | `strict: true` in tsconfig | tsconfig check |
 | Consistent naming | All commands prefixed `kcDevKit.*` | package.json review |
@@ -563,7 +567,7 @@ This is a **new project** (kc-devkit), not an increment of kc-markdown-ultra. As
 | DFT-2 | Testability | Package clean | Valid .vsix | `vsce package` | ⬜ |
 | DFS-1 | Security | Hardcoded secrets | 0 | `grep -rn "password\|secret\|token\|pat" src/` | ⬜ |
 | DFS-2 | Security | .env in .gitignore | Yes | Check .gitignore | ⬜ |
-| DFP-1 | Performance | VSIX size | < 3 MB | File size check | ⬜ |
+| DFP-1 | Performance | VSIX size | < 20 MB (pdf.js assets) | File size check | ⬜ |
 | DFP-2 | Performance | Extension activation | < 200ms | VS Code Developer: Startup Performance | ⬜ |
 | DFM-1 | Maintainability | Max file length | ≤ 300 lines | `wc -l` on all src/*.ts | ⬜ |
 | DFM-2 | Maintainability | TypeScript strict | `strict: true` | tsconfig.json check | ⬜ |

@@ -1,0 +1,163 @@
+/* KC DevKit Excel preview — kc- namespace (Excel-like grid, freeze, wrap, CJK). */
+
+.kc-excel-body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--vscode-editor-background, #1e1e1e);
+  color: var(--vscode-editor-foreground, #d4d4d4);
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Segoe UI", sans-serif;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.kc-excel-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--vscode-panel-border, #333);
+  background: var(--vscode-editorWidget-background, #252526);
+  flex: 0 0 auto;
+}
+
+.kc-excel-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 42vw;
+}
+
+.kc-excel-sep {
+  width: 1px;
+  height: 16px;
+  background: var(--vscode-panel-border, #444);
+}
+
+.kc-excel-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kc-excel-search input {
+  min-width: 220px;
+  padding: 3px 8px;
+  border: 1px solid var(--vscode-input-border, #3c3c3c);
+  background: var(--vscode-input-background, #3c3c3c);
+  color: var(--vscode-input-foreground, #ccc);
+  border-radius: 2px;
+}
+
+.kc-excel-hint {
+  margin-left: auto;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.kc-excel-error {
+  padding: 10px 14px;
+  color: var(--vscode-errorForeground, #f14c4c);
+  background: var(--vscode-inputValidation-errorBackground, #5a1d1d);
+}
+
+.kc-excel-grid-wrap {
+  flex: 1 1 auto;
+  overflow: auto;
+  position: relative;
+}
+
+.kc-excel-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  min-width: 100%;
+  background: var(--vscode-editor-background, #1e1e1e);
+}
+
+.kc-excel-colhead,
+.kc-excel-rowhead,
+.kc-excel-corner {
+  background: #e7e6e6;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid #b4b4b4;
+  z-index: 3;
+}
+
+.kc-excel-cell {
+  border: 1px solid #d0d0d0;
+  padding: 2px 6px;
+  background: #fff;
+  color: #111;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.kc-excel-formula {
+  font-variant-numeric: tabular-nums;
+}
+
+.kc-excel-sticky-row {
+  position: sticky;
+  z-index: 4;
+}
+
+.kc-excel-sticky-col {
+  position: sticky;
+  z-index: 4;
+}
+
+.kc-excel-corner {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 6;
+}
+
+.kc-excel-colhead.kc-excel-sticky-row {
+  z-index: 5;
+}
+
+.kc-excel-rowhead.kc-excel-sticky-col {
+  z-index: 5;
+}
+
+.kc-excel-cell.kc-excel-sticky-row.kc-excel-sticky-col,
+.kc-excel-colhead.kc-excel-sticky-row.kc-excel-sticky-col,
+.kc-excel-rowhead.kc-excel-sticky-row.kc-excel-sticky-col {
+  z-index: 6;
+}
+
+.kc-excel-tabs {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  background: #e6e6e6;
+  border-top: 1px solid #c0c0c0;
+  min-height: 28px;
+}
+
+.kc-excel-tab {
+  border: 1px solid #c0c0c0;
+  border-bottom: none;
+  background: #d4d4d4;
+  color: #222;
+  padding: 4px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.kc-excel-tab-active,
+.kc-excel-tab[aria-selected="true"] {
+  background: #fff;
+  font-weight: 600;
+  border-top: 2px solid #217346;
+}

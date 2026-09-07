@@ -1,11 +1,13 @@
 /**
  * KC DevKit — Extension Entry Point (Feature Orchestrator)
  *
- * Activates 4 independent feature modules based on user settings:
+ * Activates 6 independent feature modules based on user settings:
  * 1. Markdown Ultra  — KaTeX, Mermaid, TOC, code line numbers
  * 2. Code Beautify   — JS/JSON/CSS/SCSS/HTML formatting via js-beautify
  * 3. Pycache Cleaner — Recursive __pycache__ and .pyc deletion
  * 4. SageMath        — Run .sage files, syntax highlighting, snippets
+ * 5. PDF Preview     — pdf.js canvas custom editor (CJK cmaps + standard fonts)
+ * 6. Excel Preview   — xlsx/xls/csv custom editor (ExcelJS + SheetJS, freeze/wrap)
  *
  * Each module is isolated: a failure in one does not crash others.
  */
@@ -19,6 +21,8 @@ import { TocProvider } from './markdown/toc-provider';
 import { registerBeautifyProviders } from './beautify/beautify-provider';
 import { activatePycacheCleaner } from './pycache/pycache-cleaner';
 import { activateSageMath } from './sagemath/sage-runner';
+import { activatePdfPreview } from './pdf/activate';
+import { activateExcelPreview } from './excel/activate';
 
 /** Helper: read a boolean setting with fallback. */
 function isModuleEnabled(module: string): boolean {
@@ -88,6 +92,26 @@ export function activate(context: vscode.ExtensionContext) {
             outputChannel.appendLine('  ✓ SageMath module loaded');
         } catch (err) {
             outputChannel.appendLine(`  ✗ SageMath failed: ${err}`);
+        }
+    }
+
+    // ── Module 5: PDF Preview ───────────────────────────────────
+    if (isModuleEnabled('pdf')) {
+        try {
+            activatePdfPreview(context, outputChannel);
+            outputChannel.appendLine('  ✓ PDF Preview module loaded');
+        } catch (err) {
+            outputChannel.appendLine(`  ✗ PDF Preview failed: ${err}`);
+        }
+    }
+
+    // ── Module 6: Excel Preview ─────────────────────────────────
+    if (isModuleEnabled('excel')) {
+        try {
+            activateExcelPreview(context, outputChannel);
+            outputChannel.appendLine('  ✓ Excel Preview module loaded');
+        } catch (err) {
+            outputChannel.appendLine(`  ✗ Excel Preview failed: ${err}`);
         }
     }
 

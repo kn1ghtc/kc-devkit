@@ -3,6 +3,7 @@ test/**
 *.ts
 !*.d.ts
 tsconfig.json
+tsconfig.webview.json
 .env*
 !.env.example
 docs/

@@ -3,6 +3,10 @@ node_modules/
 
 # Build output
 out/
+vendor/pdfjs/
+
+# Evidence (smoke PNG)
+docs/evidence/*.png
 
 # VSIX packages
 *.vsix
