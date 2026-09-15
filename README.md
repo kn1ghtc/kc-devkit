@@ -4,6 +4,7 @@
 
 ![Version](https://img.shields.io/visual-studio-marketplace/v/kn1ghtc.kc-devkit)
 ![License](https://img.shields.io/github/license/kn1ghtc/kc-devkit)
+[![Sponsor](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?logo=github-sponsors&logoColor=white)](https://github.com/sponsors/kn1ghtc)
 
 ---
 
@@ -217,3 +218,7 @@ npm run smoke:excel
 ## License
 
 MIT © [kn1ghtc](https://github.com/kn1ghtc)
+
+## Sponsor
+
+Support research via [GitHub Sponsors](https://github.com/sponsors/kn1ghtc): **$10/month** read-only [`kctsb`](https://github.com/kn1ghtc/kctsb), **$50/month** also read-only [`NetPenetration`](https://github.com/kn1ghtc/NetPenetration). Sponsors may appear as avatars; they cannot push. See [SPONSORS.md](SPONSORS.md).
