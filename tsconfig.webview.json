@@ -9,5 +9,5 @@
     "moduleResolution": "bundler",
     "isolatedModules": true
   },
-  "include": ["src/pdf/webview/**/*.ts", "src/pdf/protocol.ts", "src/excel/webview/**/*.ts", "src/excel/protocol.ts"]
+  "include": ["src/pdf/webview/**/*.ts", "src/pdf/protocol.ts", "src/excel/webview/**/*.ts", "src/excel/protocol.ts", "src/ppt/webview/**/*.ts", "src/ppt/protocol.ts"]
 }

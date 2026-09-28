@@ -1,13 +1,14 @@
 /**
  * KC DevKit — Extension Entry Point (Feature Orchestrator)
  *
- * Activates 6 independent feature modules based on user settings:
+ * Activates 7 independent feature modules based on user settings:
  * 1. Markdown Ultra  — KaTeX, Mermaid, TOC, code line numbers
  * 2. Code Beautify   — JS/JSON/CSS/SCSS/HTML formatting via js-beautify
  * 3. Pycache Cleaner — Recursive __pycache__ and .pyc deletion
  * 4. SageMath        — Run .sage files, syntax highlighting, snippets
  * 5. PDF Preview     — pdf.js canvas custom editor (CJK cmaps + standard fonts)
  * 6. Excel Preview   — xlsx/xls/csv custom editor (ExcelJS + SheetJS, freeze/wrap)
+ * 7. PPT Preview     — ppt/pptx slide rendering (OOXML; legacy ppt via PowerPoint)
  *
  * Each module is isolated: a failure in one does not crash others.
  */
@@ -23,6 +24,7 @@ import { activatePycacheCleaner } from './pycache/pycache-cleaner';
 import { activateSageMath } from './sagemath/sage-runner';
 import { activatePdfPreview } from './pdf/activate';
 import { activateExcelPreview } from './excel/activate';
+import { activatePptPreview } from './ppt/activate';
 
 /** Helper: read a boolean setting with fallback. */
 function isModuleEnabled(module: string): boolean {
@@ -112,6 +114,15 @@ export function activate(context: vscode.ExtensionContext) {
             outputChannel.appendLine('  ✓ Excel Preview module loaded');
         } catch (err) {
             outputChannel.appendLine(`  ✗ Excel Preview failed: ${err}`);
+        }
+    }
+
+    if (isModuleEnabled('ppt')) {
+        try {
+            activatePptPreview(context, outputChannel);
+            outputChannel.appendLine('  ✓ PPT Preview module loaded');
+        } catch (err) {
+            outputChannel.appendLine(`  ✗ PPT Preview failed: ${err}`);
         }
     }
 

@@ -16,5 +16,5 @@
     "moduleResolution": "node"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "out", "test", ".vscode-test", "src/pdf/webview", "src/excel/webview"]
+  "exclude": ["node_modules", "out", "test", ".vscode-test", "src/pdf/webview", "src/excel/webview", "src/ppt/webview"]
 }

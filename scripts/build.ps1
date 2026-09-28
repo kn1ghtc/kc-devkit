@@ -123,6 +123,20 @@ if ($LASTEXITCODE -ne 0) {
 }
 Write-Host "  OK" -ForegroundColor Green
 
+Write-Host "[5c/8] Bundling ppt-viewer (esbuild: Browser ESM)..." -ForegroundColor Yellow
+& $esbuild src/ppt/webview/viewer.ts `
+    --bundle `
+    --outfile=preview-scripts/ppt-viewer.js `
+    --platform=browser `
+    --target=es2020 `
+    --format=esm `
+    --minify
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "ERROR: esbuild (ppt-viewer) failed" -ForegroundColor Red
+    exit 1
+}
+Write-Host "  OK" -ForegroundColor Green
+
 # Step 6: Copy static assets
 Write-Host "[6/8] Copying static assets..." -ForegroundColor Yellow
 
@@ -209,12 +223,14 @@ $requiredFiles = @(
     "preview-scripts/toc-init.js",
     "preview-scripts/pdf-viewer.js",
     "preview-scripts/excel-viewer.js",
+    "preview-scripts/ppt-viewer.js",
     "styles/katex.min.css",
     "styles/mermaid.css",
     "styles/line-number.css",
     "styles/toc.css",
     "styles/pdf-preview.css",
     "styles/excel-preview.css",
+    "styles/ppt-preview.css",
     "syntaxes/sage.tmLanguage.json",
     "snippets/sage.json",
     "package.json",

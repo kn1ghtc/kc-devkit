@@ -1,0 +1,65 @@
+.kc-ppt-body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #141820;
+  color: #e8eef8;
+  font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+}
+
+.kc-ppt-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  background: #1c2433;
+  border-bottom: 1px solid #314056;
+}
+
+.kc-ppt-toolbar button {
+  background: #243044;
+  color: #e8eef8;
+  border: 1px solid #3d516e;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.kc-ppt-title {
+  margin-left: auto;
+  opacity: 0.8;
+  font-size: 12px;
+}
+
+.kc-ppt-stage-wrap {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px;
+}
+
+.kc-ppt-stage {
+  position: relative;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.kc-ppt-shape {
+  position: absolute;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  overflow: hidden;
+  line-height: 1.25;
+  padding: 2px 4px;
+}
+
+.kc-ppt-error {
+  margin: 12px;
+  padding: 10px 12px;
+  background: #3a1d24;
+  color: #ffd0d6;
+  border-radius: 6px;
+}

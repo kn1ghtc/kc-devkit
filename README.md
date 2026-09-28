@@ -1,6 +1,6 @@
 # KC DevKit
 
-> Comprehensive VS Code / Cursor developer toolkit: Enhanced Markdown preview, PDF preview (CJK + math fonts), Excel/CSV preview, code formatting, Python cache cleaner, and SageMath support.
+> Comprehensive VS Code / Cursor developer toolkit: Enhanced Markdown preview, PDF preview (CJK + math fonts), Excel/CSV preview, PowerPoint preview (ppt/pptx), code formatting, Python cache cleaner, and SageMath support.
 
 ![Version](https://img.shields.io/visual-studio-marketplace/v/kn1ghtc.kc-devkit)
 ![License](https://img.shields.io/github/license/kn1ghtc/kc-devkit)
@@ -47,6 +47,16 @@ Custom **read-only** editor so Cursor can open `.xlsx` / `.xlsm` / `.xls` / `.cs
 
 `*.xlsx` / `*.xlsm` / `*.xls` / `*.csv` associate with `kcDevKit.excelPreview` by default. Use **Open With…** to switch back to the text editor for CSV.
 
+### 📊 PowerPoint Preview
+
+Custom **read-only** editor so Cursor can open `.pptx` and `.ppt` instead of a binary dump.
+
+- **pptx**: OOXML slides rendered in a webview (shape position, fill, text)
+- **ppt**: converted with Microsoft PowerPoint on the machine, then rendered the same way
+- Previous / next page controls; the file is not rewritten
+
+`*.pptx` / `*.ppt` associate with `kcDevKit.pptPreview` by default.
+
 ### 🎨 Code Beautify
 
 Multi-language formatting powered by `js-beautify`.
@@ -84,6 +94,7 @@ Full IDE support for SageMath mathematical software.
 | `KC DevKit: Refresh TOC` | Refresh Markdown TOC sidebar | — |
 | `KC DevKit: Open PDF Preview` | Open current PDF (or file picker) in the custom preview | — |
 | `KC DevKit: Open Excel Preview` | Open current spreadsheet (or file picker) in the custom preview | — |
+| `KC DevKit: Open PPT Preview` | Open current PowerPoint (or file picker) in the custom preview | — |
 | `KC DevKit: Beautify File` | Format entire document | — |
 | `KC DevKit: Beautify Selection` | Format selected text | — |
 | `KC DevKit: Clean Pycache` | Remove `__pycache__` directories | `Ctrl+Shift+P Ctrl+Shift+C` |
@@ -138,6 +149,12 @@ All settings are under `kcDevKit.*` in VS Code settings.
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `kcDevKit.excel.enabled` | `true` | Enable Excel/CSV preview custom editor |
+
+### PPT Preview
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `kcDevKit.ppt.enabled` | `true` | Enable PowerPoint preview custom editor (ppt, pptx) |
 
 ---
 
