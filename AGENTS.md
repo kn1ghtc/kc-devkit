@@ -51,7 +51,8 @@ PPT webview viewer is bundled to `preview-scripts/ppt-viewer.js`. PPTX parsing (
 
 ### Code Standards
 
-- TypeScript strict mode, esbuild minify
+- TypeScript 7（`devDependencies.typescript` 使用 `^7`，不回退 5.x，也不使用 typescript6 垫片）。扩展宿主 `tsconfig.json` 为 `module: preserve`、`moduleResolution: bundler`、`types: ["node"]`；webview 使用 `tsconfig.webview.json`，`types: []` 以免带入 Node 全局类型。esbuild minify。TypeScript 7.1 稳定 Compiler API 的工作区升级步骤见 `.github/memories/repo/typescript-7-eslint-shim.md`。
+- 不要手写 `onCustomEditor:*` 激活事件。`contributes.customEditors` 已声明的视图由 VS Code 自动生成对应激活事件。
 - Preview scripts: browser platform; mermaid/toc IIFE; PDF viewer ESM
 - CSS 命名空间使用 `kc-` 前缀避免与 VS Code 内置冲突
 - 静态资源变更后必须运行 build 验证输出完整性

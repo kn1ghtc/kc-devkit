@@ -65,10 +65,7 @@
     "onLanguage:css",
     "onLanguage:less",
     "onLanguage:scss",
-    "onLanguage:html",
-    "onCustomEditor:kcDevKit.pdfPreview",
-    "onCustomEditor:kcDevKit.excelPreview",
-    "onCustomEditor:kcDevKit.pptPreview"
+    "onLanguage:html"
   ],
   "contributes": {
     "markdown.markdownItPlugins": true,
@@ -393,7 +390,7 @@
     "@vscode/vsce": "^3.2.2",
     "esbuild": "^0.24.2",
     "ovsx": "^0.10.6",
-    "typescript": "^5.7.3"
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "exceljs": "^4.4.0",

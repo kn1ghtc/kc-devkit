@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "commonjs",
+    "module": "preserve",
     "lib": ["ES2020"],
     "outDir": "out",
     "rootDir": "src",
+    "types": ["node"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -13,7 +14,7 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "moduleResolution": "node"
+    "moduleResolution": "bundler"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "out", "test", ".vscode-test", "src/pdf/webview", "src/excel/webview", "src/ppt/webview"]
